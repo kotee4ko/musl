@@ -1,0 +1,32 @@
+%rename cpp_options old_cpp_options
+
+*cpp_options:
+-nostdinc -isystem /opt/wokr/l1nux/MUSLSHELL/MUSL_INSTALL/include -isystem include%s %(old_cpp_options)
+
+*cc1:
+%(cc1_cpu) -nostdinc -isystem /opt/wokr/l1nux/MUSLSHELL/MUSL_INSTALL/include -isystem include%s
+
+*link_libgcc:
+-L/opt/wokr/l1nux/MUSLSHELL/MUSL_INSTALL/lib -L .%s
+
+*libgcc:
+libgcc.a%s %:if-exists(libgcc_eh.a%s)
+
+*startfile:
+%{!shared: /opt/wokr/l1nux/MUSLSHELL/MUSL_INSTALL/lib/Scrt1.o} /opt/wokr/l1nux/MUSLSHELL/MUSL_INSTALL/lib/crti.o crtbeginS.o%s
+
+*endfile:
+crtendS.o%s /opt/wokr/l1nux/MUSLSHELL/MUSL_INSTALL/lib/crtn.o
+
+*link:
+-dynamic-linker /lib/ld-musl-x86_64.so.1 -nostdlib %{shared:-shared} %{static:-static} %{rdynamic:-export-dynamic}
+
+*esp_link:
+
+
+*esp_options:
+
+
+*esp_cpp_options:
+
+

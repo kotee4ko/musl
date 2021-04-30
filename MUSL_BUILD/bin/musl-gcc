@@ -1,0 +1,2 @@
+#!/bin/sh
+exec "${REALGCC:-gcc}" "$@" -specs "/opt/wokr/l1nux/MUSLSHELL/MUSL_INSTALL/lib/musl-gcc.specs"
